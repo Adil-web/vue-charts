@@ -48,6 +48,33 @@ export default {
         }
       }
     )
+  },
+  watch: {
+    chartData(newData) {
+        this.chartData = newData
+        const {
+            borderColor,
+            pointBorderColor,
+            pointBackgroundColor,
+            backgroundColor
+            } = this.chartColors;
+
+        this.renderChart(
+        {
+            labels: Chart.defaults.global.labels = this.chartData.map(d => d.region === '' ? d.area : d.region),
+            datasets: [
+            {
+                label: this.label,
+                data: Chart.defaults.global.labels = this.chartData.map(d => d.naturalPopulationGrowth),
+                borderColor: borderColor,
+                pointBorderColor: pointBorderColor,
+                pointBackgroundColor: pointBackgroundColor,
+                backgroundColor: backgroundColor
+            }
+            ]
+          }
+      )
+    }
   }
 };
 </script>

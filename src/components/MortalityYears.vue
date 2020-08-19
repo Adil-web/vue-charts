@@ -21,6 +21,7 @@ export default {
     this.chartData.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0));
     const years = this.chartData.map(d => d.year);
     const mortality = this.chartData.map(d => d.overallMortalityRate);
+    // console.log(this.chartData)
 
     const {
       borderColor,
@@ -41,13 +42,36 @@ export default {
             pointBackgroundColor: pointBackgroundColor,
             backgroundColor: backgroundColor
           }
-        ],
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
+        ]
       }
     )
+  },
+  watch: {
+    chartData(newData) {
+        this.chartData = newData
+        const {
+            borderColor,
+            pointBorderColor,
+            pointBackgroundColor,
+            backgroundColor
+            } = this.chartColors;
+
+        this.renderChart(
+        {
+            labels: Chart.defaults.global.labels = this.chartData.map(d => d.year),
+            datasets: [
+            {
+                label: this.label,
+                data: Chart.defaults.global.labels = this.chartData.map(d => d.overallMortalityRate),
+                borderColor: borderColor,
+                pointBorderColor: pointBorderColor,
+                pointBackgroundColor: pointBackgroundColor,
+                backgroundColor: backgroundColor
+            }
+            ]
+          }
+      )
+    }
   }
 };
 </script>

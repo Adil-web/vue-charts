@@ -8,7 +8,6 @@ export default {
       type: String
     },
     chartData: {
-      type: Array
     },
     options: {
       type: Object
@@ -18,9 +17,10 @@ export default {
     }
   },
   mounted() {
-    this.chartData.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0));
-    const years = this.chartData.map(d => d.year);
-    const expectancy = this.chartData.map(d => d.lifeExpectancy);
+    // this.chartData.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0));
+    // const years = this.chartData.map(d => d.year);
+    // const expectancy = this.chartData.map(d => d.lifeExpectancy);
+    // console.log(this.chartData)
 
     const {
       borderColor,
@@ -29,13 +29,18 @@ export default {
       backgroundColor
     } = this.chartColors;
 
+    let population = []
+    for (const [key, value] of Object.entries(this.chartData)) {
+                        population.push(`${value}`);
+}
+
     this.renderChart(
       {
-        labels: years,
+        labels: Object.keys(this.chartData),
         datasets: [
           {
             label: this.label,
-            data: expectancy,
+            data: population,
             borderColor: borderColor,
             pointBorderColor: pointBorderColor,
             pointBackgroundColor: pointBackgroundColor,

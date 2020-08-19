@@ -19,7 +19,7 @@ export default {
   },
   mounted() {
     // this.chartData.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0)); 
-    const regions = this.chartData.map(d => d.region);
+    const regions = this.chartData.map(d => d.region === '' ? d.area : d.region);
     const mortality = this.chartData.map(d => d.overallMortalityRate);
 
     const {
@@ -44,6 +44,33 @@ export default {
         ],
       }
     )
+  },
+  watch: {
+    chartData(newData) {
+        this.chartData = newData
+        const {
+            borderColor,
+            pointBorderColor,
+            pointBackgroundColor,
+            backgroundColor
+            } = this.chartColors;
+
+        this.renderChart(
+        {
+            labels: Chart.defaults.global.labels = this.chartData.map(d => d.region === '' ? d.area : d.region),
+            datasets: [
+            {
+                label: this.label,
+                data: Chart.defaults.global.labels = this.chartData.map(d => d.overallMortalityRate),
+                borderColor: borderColor,
+                pointBorderColor: pointBorderColor,
+                pointBackgroundColor: pointBackgroundColor,
+                backgroundColor: backgroundColor
+            }
+            ]
+          }
+      )
+    }
   }
 };
 </script>

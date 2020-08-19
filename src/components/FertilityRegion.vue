@@ -41,13 +41,36 @@ export default {
             pointBackgroundColor: pointBackgroundColor,
             backgroundColor: backgroundColor
           }
-        ],
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
+        ]
       }
     )
+  },
+  watch: {
+    chartData(newData) {
+        this.chartData = newData
+        const {
+            borderColor,
+            pointBorderColor,
+            pointBackgroundColor,
+            backgroundColor
+            } = this.chartColors;
+
+        this.renderChart(
+        {
+            labels: Chart.defaults.global.labels = this.chartData.map(d => d.region === '' ? d.area : d.region),
+            datasets: [
+            {
+                label: this.label,
+                data: Chart.defaults.global.labels = this.chartData.map(d => d.fertility),
+                borderColor: borderColor,
+                pointBorderColor: pointBorderColor,
+                pointBackgroundColor: pointBackgroundColor,
+                backgroundColor: backgroundColor
+            }
+            ]
+          }
+      )
+    }
   }
 };
 </script>
